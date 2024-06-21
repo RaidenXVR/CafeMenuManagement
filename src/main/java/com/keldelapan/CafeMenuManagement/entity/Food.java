@@ -1,9 +1,6 @@
 package com.keldelapan.CafeMenuManagement.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Lob;
+import jakarta.persistence.*;
 import org.springframework.data.annotation.Id;
 
 @Entity
@@ -17,6 +14,7 @@ public class Food {
     private String description;
     private String type;
     @Lob
+    @Column(columnDefinition = "LONGBLOB")
     private byte[] image;
 
     public byte[] getImage() {

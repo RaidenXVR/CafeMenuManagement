@@ -6,6 +6,7 @@ import com.keldelapan.CafeMenuManagement.service.FoodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,7 +32,19 @@ public class DashboardController {
         return "/dashboard/addFood";
     }
     @PostMapping("/saveFood")
-    public String saveFood(@ModelAttribute Food food, @RequestParam("image") MultipartFile imageFile) {
+    public String saveFood(
+            @RequestParam("name") String name,
+            @RequestParam("price") double price,
+            @RequestParam("type") String type,
+            @RequestParam("description") String description,
+            @RequestParam("image") MultipartFile imageFile
+    ) {
+        Food food = new Food();
+        food.setName(name);
+        food.setPrice(price);
+        food.setType(type);
+        food.setDescription(description);
+
         try {
             if (!imageFile.isEmpty()) {
                 food.setImage(imageFile.getBytes());
@@ -39,6 +52,7 @@ public class DashboardController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         foodService.saveFood(food);
         return "redirect:/dashboard";
     }

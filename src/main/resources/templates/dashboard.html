@@ -7,9 +7,11 @@
 </head>
 <body>
 <div class="top-bar">
+    <form th:action="@{/home}" th:method="get">
     <button class="home-btn">
         <img src="home-icon.png" alt="Home" class="icon">
     </button>
+    </form>
     <h1>Food Dashboard</h1>
 </div>
 
@@ -26,7 +28,9 @@
         </thead>
         <tbody>
         <tr th:each="food : ${foods}">
-            <td><img th:src="@{${food.imageUrl}}" alt="Food Image" class="food-img"></td>
+            <td>
+                <img th:src="@{'/foodImage/' + ${food.id}}" alt="Food Image" class="food-img">
+            </td>
             <td th:text="${food.name}">Food Name</td>
             <td th:text="${food.price}">Food Price</td>
             <td th:text="${food.description}">Food Description</td>

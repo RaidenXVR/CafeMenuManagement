@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FoodService {
@@ -21,8 +22,8 @@ public class FoodService {
         return foodRepository.save(food);
     }
 
-    public Food getFoodById(Integer id) {
-        return foodRepository.findById(id).orElse(null);
+    public Optional<Food> getFoodById(Integer id) {
+        return foodRepository.findById(id);
     }
 
     public void deleteFood(Integer id) {

@@ -3,6 +3,7 @@ package com.keldelapan.CafeMenuManagement.entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Lob;
 import org.springframework.data.annotation.Id;
 
 @Entity
@@ -15,7 +16,16 @@ public class Food {
     private Double price;
     private String description;
     private String type;
-    private String imageUrl;
+    @Lob
+    private byte[] image;
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
 
     public Integer getId() {
         return id;
@@ -57,11 +67,5 @@ public class Food {
         this.type = type;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
 }

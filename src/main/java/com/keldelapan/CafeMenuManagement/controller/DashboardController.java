@@ -32,17 +32,14 @@ public class DashboardController {
     }
     @PostMapping("/saveFood")
     public String saveFood(@ModelAttribute Food food, @RequestParam("image") MultipartFile imageFile) {
-        if (!imageFile.isEmpty()) {
-            try {
-                byte[] bytes = imageFile.getBytes();
-                Path path = Paths.get("uploads/" + imageFile.getOriginalFilename());
-                Files.write(path, bytes);
-                food.setImageUrl("/uploads/" + imageFile.getOriginalFilename());
-            } catch (IOException e) {
-                e.printStackTrace();
+        try {
+            if (!imageFile.isEmpty()) {
+                food.setImage(imageFile.getBytes());
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         foodService.saveFood(food);
-        return "redirect:/dashboard";
+        return "redirect:/foods";
     }
 }

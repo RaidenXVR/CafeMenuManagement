@@ -40,6 +40,6 @@ public class DashboardController {
             e.printStackTrace();
         }
         foodService.saveFood(food);
-        return "redirect:/foods";
+        return "redirect:/dashboard";
     }
 }

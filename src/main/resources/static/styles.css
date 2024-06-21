@@ -185,12 +185,12 @@ header img {
 
 .food-table {
     width: 100%;
-    border-collapse: collapse;
+    border-collapse: separate;
     margin: 20px 0;
 }
 
 .food-table th, .food-table td {
-    border: 1px solid #ddd;
+    border: 4px solid #ddd;
     padding: 8px;
     text-align: left;
 }
@@ -201,8 +201,8 @@ header img {
 }
 
 .food-img {
-    width: 50px;
-    height: 50px;
+    width: 100px;
+    height: auto;
     object-fit: cover;
 }
 

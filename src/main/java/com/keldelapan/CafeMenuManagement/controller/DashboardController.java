@@ -16,6 +16,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
+
 @Controller
 public class DashboardController {
     @Autowired
@@ -54,6 +56,13 @@ public class DashboardController {
         }
 
         foodService.saveFood(food);
+        return "redirect:/dashboard";
+    }
+    @PostMapping("/deleteFoods")
+    public String deleteFoods(@RequestParam("foodIds") List<Integer> foodIds) {
+        for (Integer id : foodIds) {
+            foodService.deleteFood(id);
+        }
         return "redirect:/dashboard";
     }
 }

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Food Dashboard</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<div class="top-bar">
+    <button class="home-btn">
+        <img src="home-icon.png" alt="Home" class="icon">
+    </button>
+    <h1>Food Dashboard</h1>
+</div>
+
+<div class="content">
+    <table class="food-table">
+        <thead>
+        <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Type</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="food : ${foods}">
+            <td><img th:src="@{${food.imageUrl}}" alt="Food Image" class="food-img"></td>
+            <td th:text="${food.name}">Food Name</td>
+            <td th:text="${food.price}">Food Price</td>
+            <td th:text="${food.description}">Food Description</td>
+            <td th:text="${food.type}">Food Type</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="bottom-bar">
+
+    <button class="action-btn edit-btn">Edit</button>
+    <form th:action="@{/addFood}" th:method="get">
+        <button class="action-btn add-btn">Add</button>
+    </form>
+    <button class="action-btn delete-btn">Delete</button>
+</div>
+</body>
+</html>

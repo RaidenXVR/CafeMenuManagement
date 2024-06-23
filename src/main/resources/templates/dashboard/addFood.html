@@ -17,9 +17,10 @@
 <div class="content">
     <form th:action="@{/saveFood}" method="post" enctype="multipart/form-data">
         <div class="upload-container">
-            <label for="imageUpload" class="upload-label">Click to upload image</label>
+            <label for="imageUpload" class="upload-label">Click to upload image
             <input type="file" id="imageUpload" name="image" accept="image/*" onchange="previewImage(event)" class="upload-input">
             <img id="imagePreview" class="image-preview" alt="Image Preview">
+            </label>
         </div>
         <div class="form-group">
             <label for="name">Name:</label>
@@ -38,8 +39,8 @@
             <textarea id="description" name="description" required></textarea>
         </div>
         <div class="bottom-bar">
-            <button class="action-btn cancel-btn" type="button" onclick="window.history.back();">Cancel</button>
-            <button class="action-btn add-btn" type="submit">+ Add</button>
+            <button class="action-btn-add cancel-btn-add" type="button" onclick="window.history.back();">Cancel</button>
+            <button class="action-btn-add add-btn-add" type="submit">+ Add</button>
         </div>
     </form>
 </div>

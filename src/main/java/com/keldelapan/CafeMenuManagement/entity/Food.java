@@ -1,14 +1,13 @@
 package com.keldelapan.CafeMenuManagement.entity;
 
 import jakarta.persistence.*;
-import org.springframework.data.annotation.Id;
 
 @Entity
 public class Food {
-    @jakarta.persistence.Id
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String name;
     private Double price;
     private String description;

@@ -19,9 +19,9 @@ public class ImageController {
 
     @GetMapping(value = "/foodImage/{id}", produces = MediaType.IMAGE_JPEG_VALUE)
     public ResponseEntity<byte[]> getImage(@PathVariable Integer id) {
-        Optional<Food> food = foodService.getFoodById(id);
-        if (food.isPresent() && food.get().getImage() != null) {
-            return ResponseEntity.ok(food.get().getImage());
+        Food food = foodService.getFoodById(id);
+        if (food !=null && food.getImage() != null) {
+            return ResponseEntity.ok(food.getImage());
         } else {
             return ResponseEntity.notFound().build();
         }

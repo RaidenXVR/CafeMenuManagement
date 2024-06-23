@@ -18,12 +18,14 @@ public class FoodService {
         return foodRepository.findAll();
     }
 
-    public Food saveFood(Food food) {
-        return foodRepository.save(food);
+    public void saveFood(Food food) {
+        foodRepository.save(food);
+
     }
 
-    public Optional<Food> getFoodById(Integer id) {
-        return foodRepository.findById(id);
+
+    public Food getFoodById(Integer id) {
+        return foodRepository.findById(id).orElse(null);
     }
 
     public void deleteFood(Integer id) {

@@ -7,16 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class DashboardController {
@@ -58,11 +56,51 @@ public class DashboardController {
         foodService.saveFood(food);
         return "redirect:/dashboard";
     }
-    @PostMapping("/deleteFoods")
-    public String deleteFoods(@RequestParam("foodIds") List<Integer> foodIds) {
-        for (Integer id : foodIds) {
-            foodService.deleteFood(id);
+
+    @GetMapping("/editFood/{id}")
+    public String editFoodForm(@PathVariable Integer id, Model model) {
+        Food food = foodService.getFoodById(id);
+        if (food != null) {
+            model.addAttribute("food", food);
+            return "dashboard/editFood";
         }
+        return "redirect:/dashboard";
+    }
+
+    @PostMapping("/updateFood")
+    public String updateFood(
+            @RequestParam("id") Integer id,
+            @RequestParam("name") String name,
+            @RequestParam("price") double price,
+            @RequestParam("type") String type,
+            @RequestParam("description") String description,
+            @RequestParam("image") MultipartFile imageFile
+    ) {
+        Food food = foodService.getFoodById(id);
+        if (food == null) {
+            return "redirect:/dashboard";
+        }
+
+        food.setName(name);
+        food.setPrice(price);
+        food.setType(type);
+        food.setDescription(description);
+
+        try {
+            if (!imageFile.isEmpty()) {
+                food.setImage(imageFile.getBytes());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        foodService.saveFood(food);
+        return "redirect:/dashboard";
+    }
+
+    @GetMapping("/deleteFood/{id}")
+    public String deleteFood(@PathVariable Integer id) {
+        foodService.deleteFood(id);
         return "redirect:/dashboard";
     }
 }

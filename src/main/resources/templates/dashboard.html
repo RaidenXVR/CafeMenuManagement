@@ -14,21 +14,20 @@
     </form>
     <h1>Food Dashboard</h1>
 </div>
-<form th:action="@{/deleteFoods}" method="post">
+
     <table class="food-table">
         <thead>
         <tr>
-            <th>Select</th>
             <th>Image</th>
             <th>Name</th>
             <th>Price</th>
             <th>Type</th>
             <th>Description</th>
+            <th>Action</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="food : ${foods}">
-            <td><input type="checkbox" name="foodIds" th:value="${food.id}"></td>
             <td>
                 <img th:src="@{'/foodImage/' + ${food.id}}" alt="Food Image" class="food-img">
             </td>
@@ -36,15 +35,16 @@
             <td th:text="${food.price}">Price</td>
             <td th:text="${food.type}">Type</td>
             <td th:text="${food.description}">Description</td>
+            <td>
+                <a th:href="@{/editFood/{id}(id=${food.id})}" class="action-btn edit-btn">Edit</a>
+                <a th:href="@{/deleteFood/{id}(id=${food.id})}" class="action-btn delete-btn" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
+            </td>
         </tr>
         </tbody>
     </table>
-
     <div class="bottom-bar">
-        <a class="action-btn" th:href="@{/addFood}">Add</a>
-        <button class="action-btn edit-btn" type="button">Edit</button>
-        <button class="action-btn delete-btn" type="submit">Delete</button>
+        <a class="action-btn add-btn" th:href="@{/addFood}">Add</a>
     </div>
-</form>
+
 </body>
 </html>

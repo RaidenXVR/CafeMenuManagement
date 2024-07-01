@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee Kios</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+</head>
+<body>
+<header class="header">
+    <nav>
+        <div class="nav__header">
+            <div class="nav__logo">
+                <a href="#">
+                    <img
+                            src="assets/logo.png"
+                            alt="logo"
+                            class="nav__logo-dark"
+                    />
+                </a>
+            </div>
+            <div class="nav__menu__btn" id="menu-btn">
+                <i class="ri-menu-line"></i>
+            </div>
+        </div>
+        <ul class="nav__links" id="nav-links">
+            <li><a href="#home">HOME</a></li>
+            <li><a href="#special">SPECIAL</a></li>
+            <li><a href="#menu">MENU</a></li>
+
+            <li th:if="${session.user == null}"><a  th:href="@{/login}">LOGIN</a></li>
+            <li th:if="${session.user == null}"><a th:href="@{/register}">REGISTER</a></li>
+            <li th:if="${session.user != null}"><a  th:href="@{/logout}">LOGOUT</a></li>
+            <li th:if="${session.user != null} and ${session.user.is_admin}"><a th:href="@{/dashboard}">DASHBOARD</a></li>
+        </ul>
+    </nav>
+    <div class="section__container header__container" id="home">
+        <div class="header__image">
+            <img src="assets/header.png" alt="header" />
+        </div>
+        <div class="header__content">
+            <h2>IT IS GOOD TIME FOR THE GREATE TASTE OF COFFE SHOP</h2>
+            <h1>COFFE<br /><span>WEEK</span></h1>
+        </div>
+    </div>
+</header>
+
+<section class="section__container banner__container" id="special">
+    <div class="banner__card">
+        <p>TRY IT OUT TODAY</p>
+        <h4>MOST POPULAR COFFE</h4>
+    </div>
+    <div class="banner__card">
+        <p>TRY IT OUT TODAY</p>
+        <h4>MORE FUN<br />MORE TASTE</h4>
+    </div>
+    <div class="banner__card">
+        <p>TRY IT OUT TODAY</p>
+        <h4>FRESH & CHILI</h4>
+    </div>
+</section>
+
+<section class="section__container order__container" id="menu">
+    <h3>ALWAYS TASTEY COFFE</h3>
+    <h2 class="section__header">CHOOSE & ENJOY</h2>
+    <p class="section__description">
+        Whether you're seeking traditional brews or bold new flavors,
+        your journey into coffee excellence starts here. Delight in every sip as
+        you craft your own personalized coffee experience at Coffee Company.
+    </p>
+    <div class="order__grid product-carousel">
+        <div class="order__card">
+            <img src="assets/order-1.png" alt="order" />
+            <h4>MILK COFFE</h4>
+            <p>
+                Sink your teeth into the timeless perfection of our Chicken Burger,
+                an experience that never goes out of style.
+            </p>
+            <button class="btn">ORDER NOW</button>
+        </div>
+        <div class="order__card">
+            <img src="assets/order-2.png" alt="order" />
+            <h4>Veggie Delight Burger</h4>
+            <p>
+                Embrace the vibrant flavors of our Veggie Delight Burger, a
+                celebration of freshness and wholesome goodness.
+            </p>
+            <button class="btn">ORDER NOW</button>
+        </div>
+        <div class="order__card">
+            <img src="assets/order-3.png" alt="order" />
+            <h4>BBQ Bacon Burger</h4>
+            <p>
+                Indulge in a symphony of smoky, savory flavors with our BBQ Bacon
+                Burger, grilled and topped with crispy bacon.
+            </p>
+            <button class="btn">ORDER NOW</button>
+        </div>
+    </div>
+</section>
+
+<section class="section__container event__container" id="event">
+    <div class="event__content">
+        <div class="event__image">
+            <img src="assets/event.png" alt="event" />
+        </div>
+        <div class="event__details">
+            <h3>Discover</h3>
+            <h2 class="section__header">UPCOMING EVENTS</h2>
+            <p class="section__description">
+                From exclusive burger tastings and chef collaborations to community
+                outreach initiatives and seasonal celebrations, there's always
+                something special on the horizon at Burger Company. Be the first to
+                know about our upcoming events, promotions, and gatherings as we
+                continue to bring joy and flavor to our cherished customers. Join us
+                in creating memorable moments and delicious memories together!
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="reservation" id="contact">
+    <div class="section__container reservation__container">
+        <h3>RESERVATION</h3>
+        <h2 class="section__header">BOOK YOUR TABLE</h2>
+        <form action="/">
+            <input type="text" placeholder="NAME" />
+            <input type="email" placeholder="EMAIL" />
+            <input type="date" placeholder="DATE" />
+            <input type="time" placeholder="TIME" />
+            <input type="number" placeholder="PEOPLE" />
+            <button class="btn" type="submit">FIND TABLE</button>
+        </form>
+    </div>
+    <img
+            src="assets/reservation-bg-1.png"
+            alt="reservation"
+            class="reservation__bg-1"
+    />
+    <img
+            src="assets/reservation-bg-2.png"
+            alt="reservation"
+            class="reservation__bg-2"
+    />
+</section>
+
+<footer class="footer">
+    <div class="section__container footer__container">
+        <div class="footer__logo">
+            <img src="assets/logo-white.png" alt="logo" />
+        </div>
+        <div class="footer__content">
+            <p>
+                Welcome to Eight Coffee, where passion for exceptional coffee
+                and genuine hospitality blend harmoniously. Our journey is one
+                of dedication to crafting the perfect coffee experience,
+                from sourcing the finest beans to delivering unparalleled taste in every cup.
+            </p>
+            <div>
+                <ul class="footer__links">
+                    <li>
+                        <span><i class="ri-map-pin-2-fill"></i></span>
+                        Cibiru
+                    </li>
+                    <li>
+                        <span><i class="ri-mail-fill"></i></span>
+                        theeightcoffe@gmail.com
+                    </li>
+                </ul>
+                <div class="footer__socials">
+                    <a href="#"><i class="ri-facebook-circle-fill"></i></a>
+                    <a href="#"><i class="ri-instagram-fill"></i></a>
+                    <a href="#"><i class="ri-twitter-fill"></i></a>
+                    <a href="#"><i class="ri-whatsapp-fill"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer__bar">
+        The Eight Coffe Shop Cibiru Bandung Jawa Barat
+    </div>
+</footer>
+
+<script src="https://unpkg.com/scrollreveal"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('.product-carousel').slick({
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 2000,
+            dots: true,
+            prevArrow: '<button type="button" class="slick-prev">Previous</button>',
+            nextArrow: '<button type="button" class="slick-next">Next</button>',
+            responsive: [
+                {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 2
+                    }
+                },
+                {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 1
+                    }
+                }
+            ]
+        });
+    });
+</script>
+</body>
+</html>

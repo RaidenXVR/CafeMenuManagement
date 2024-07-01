@@ -2,34 +2,41 @@ package com.keldelapan.CafeMenuManagement.controller;
 
 
 import com.keldelapan.CafeMenuManagement.entity.Food;
+import com.keldelapan.CafeMenuManagement.entity.UserCafe;
 import com.keldelapan.CafeMenuManagement.service.FoodService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class DashboardController {
     @Autowired
     private FoodService foodService;
     @GetMapping("/dashboard")
-    public String dashboard(Model model){
+    public String dashboard(Model model, HttpSession session){
+        UserCafe user = (UserCafe) session.getAttribute("user");
+
+        if (!user.getIs_admin()){
+            return "redirect:/home";
+        }
+
         model.addAttribute("foods",foodService.getAllFoods() );
-        return "dashboard";
+        return "admin/dashboard";
     }
 
     @GetMapping("/addFood")
-    public String addFoodForm(Model model) {
+    public String addFoodForm(Model model, HttpSession session) {
+        UserCafe user = (UserCafe) session.getAttribute("user");
+
+        if (!user.getIs_admin()){
+            return "redirect:/home";
+        }
         model.addAttribute("food", new Food());
-        return "/dashboard/addFood";
+        return "admin/dashboard/addFood";
     }
     @PostMapping("/saveFood")
     public String saveFood(
@@ -58,11 +65,18 @@ public class DashboardController {
     }
 
     @GetMapping("/editFood/{id}")
-    public String editFoodForm(@PathVariable Integer id, Model model) {
+    public String editFoodForm(@PathVariable Integer id, Model model, HttpSession session) {
+
+        UserCafe user = (UserCafe) session.getAttribute("user");
+
+        if (!user.getIs_admin()){
+            return "redirect:/home";
+        }
+
         Food food = foodService.getFoodById(id);
         if (food != null) {
             model.addAttribute("food", food);
-            return "dashboard/editFood";
+            return "admin/dashboard/editFood";
         }
         return "redirect:/dashboard";
     }
